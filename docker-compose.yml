@@ -1,0 +1,9 @@
+services:
+  qrweb:
+    build: .
+    container_name: qr_container
+    ports:
+      - "8091:8091"
+    volumes:
+      - .:/app
+    command: bash -c "go build -buildvcs=false -o qrgenerateweb . && ./qrgenerateweb"

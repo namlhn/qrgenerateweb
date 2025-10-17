@@ -8,194 +8,327 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2563eb;
+            --primary: #2563eb;
             --primary-dark: #1d4ed8;
-            --secondary-color: #10b981;
-            --secondary-dark: #059669;
-            --accent-color: #f59e0b;
-            --text-color: #1f2937;
-            --text-light: #6b7280;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e5e7eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --surface: #ffffff;
+            --surface-muted: #f3f4f6;
+            --border: #e5e7eb;
+            --text: #1f2937;
+            --text-muted: #6b7280;
         }
 
         body {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #e0f2fe 100%);
-            color: var(--text-color);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: radial-gradient(circle at top, rgba(37, 99, 235, 0.12), transparent 55%),
+                        radial-gradient(circle at bottom, rgba(16, 185, 129, 0.1), transparent 40%),
+                        var(--surface-muted);
+            color: var(--text);
         }
 
-        .brand-gradient {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        .shell {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .brand h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 1.5rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease-in-out;
-            backdrop-filter: blur(10px);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .form-input, .form-select {
-            border-radius: 0.75rem;
-            border: 2px solid var(--border-color);
-            transition: all 0.3s ease-in-out;
-            background-color: #fafafa;
-        }
-
-        .form-input:focus, .form-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-            background-color: white;
-            outline: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            color: white;
-            border-radius: 0.75rem;
-            padding: 1rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease-in-out;
-            border: none;
-            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px 0 rgba(37, 99, 235, 0.5);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
-            color: white;
-            border-radius: 0.75rem;
-            padding: 1rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease-in-out;
-            border: none;
-            box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px 0 rgba(16, 185, 129, 0.5);
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-
-        #qr-code-preview {
-            border: 2px dashed var(--border-color);
-            background: linear-gradient(45deg, #f8fafc 25%, transparent 25%),
-                        linear-gradient(-45deg, #f8fafc 25%, transparent 25%),
-                        linear-gradient(45deg, transparent 75%, #f8fafc 75%),
-                        linear-gradient(-45deg, transparent 75%, #f8fafc 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
 
         .logo {
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+            width: 64px;
+            height: 64px;
+            border-radius: 20%;
+            object-fit: cover;
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
         }
 
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            display: grid;
+            gap: 1.5rem;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .hero p {
+            max-width: 580px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .highlights {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .highlights span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .panel-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .panel-grid {
+                grid-template-columns: repeat(12, 1fr);
+            }
+
+            .controls {
+                grid-column: span 7;
+            }
+
+            .preview {
+                grid-column: span 5;
+            }
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 1.5rem;
+            padding: clamp(1.5rem, 3vw, 2rem);
+            border: 1px solid rgba(229, 231, 235, 0.6);
+            box-shadow: 0 15px 40px -15px rgba(15, 23, 42, 0.2);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .field-group {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .field-row {
+            display: grid;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .field-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .field-row--triple {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.85rem;
+            border: 1px solid var(--border);
+            background: var(--surface-muted);
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+            font-size: 0.96rem;
+            color: var(--text);
+        }
+
+        .control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            background: var(--surface);
+        }
+
+        input[type="color"].control {
+            height: 3.5rem;
+            padding: 0.4rem;
+            cursor: pointer;
+        }
+
+        input[type="range"].control {
+            padding: 0;
+            height: 0.75rem;
+            background: linear-gradient(to right, var(--primary), rgba(37, 99, 235, 0.2));
+            accent-color: var(--primary);
+        }
+
+        .button-primary {
+            width: 100%;
+            border: none;
+            border-radius: 0.9rem;
+            padding: 0.9rem 1.25rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(120deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
+        }
+
+        .preview {
+            display: grid;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .preview-heading {
+            display: grid;
+            gap: 0.35rem;
+        }
+
+        .preview-heading h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .preview-heading span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .preview-frame {
+            border-radius: 1.25rem;
+            border: 1px dashed rgba(37, 99, 235, 0.35);
+            background: linear-gradient(120deg, rgba(37, 99, 235, 0.06), rgba(16, 185, 129, 0.06));
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .preview-placeholder {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .preview-placeholder i {
+            font-size: 2.5rem;
+            color: rgba(15, 23, 42, 0.15);
+        }
+
+        .download {
+            display: none;
+            text-decoration: none;
+            font-weight: 600;
+            color: white;
+            border-radius: 0.85rem;
+            padding: 0.85rem 1.25rem;
+            background: linear-gradient(120deg, var(--secondary), #0ea5e9);
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .download:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 30px rgba(14, 165, 233, 0.3);
+        }
+
+        .download.visible {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
     </style>
 </head>
-<body class="antialiased min-h-screen">
-    <div class="container mx-auto p-4 md:p-8">
-        <!-- Header with Logo and Brand -->
-        <header class="text-center mb-16 relative">
-            <div class="flex items-center justify-center mb-6 animate-float">
-                <img src="/static/logonv.png" alt="NextViet Logo" class="logo w-16 h-16 mr-4 rounded-full">
+<body>
+    <div class="shell">
+        <header class="hero">
+            <div class="brand">
+                <img src="/static/logonv.png" alt="NextViet Logo" class="logo">
                 <div>
-                    <h1 class="text-6xl font-bold brand-gradient">NextViet</h1>
-                    <p class="text-2xl font-light text-gray-600 mt-1">QR Code Generator</p>
+                    <h1>NextViet QR</h1>
+                    <div class="highlights">
+                        <span><i class="fas fa-qrcode"></i> Smart branding</span>
+                        <span><i class="fas fa-palette"></i> Vibrant colors</span>
+                        <span><i class="fas fa-wand-magic-sparkles"></i> Instant preview</span>
+                    </div>
                 </div>
             </div>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Create stunning, professional QR codes with advanced customization options.
-                Perfect for businesses, events, and personal use.
-            </p>
-
-            <!-- Feature highlights -->
-            <div class="flex justify-center mt-8 space-x-8">
-                <div class="feature-card px-4 py-2 rounded-full">
-                    <span class="text-sm font-medium text-gray-700">✨ Custom Shapes</span>
-                </div>
-                <div class="feature-card px-4 py-2 rounded-full">
-                    <span class="text-sm font-medium text-gray-700">🎨 Color Themes</span>
-                </div>
-                <div class="feature-card px-4 py-2 rounded-full">
-                    <span class="text-sm font-medium text-gray-700">🖼️ Logo Support</span>
-                </div>
-            </div>
+            <p>Thiết kế mã QR chuyên nghiệp với bảng màu tuỳ chỉnh, logo NextViet và trải nghiệm tối giản, phù hợp cho mọi chiến dịch marketing.</p>
         </header>
 
-        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Controls Panel -->
-            <div class="lg:col-span-2 card p-8">
-                <div class="space-y-8">
-                    <!-- Text Input -->
-                    <div class="glass-effect p-6 rounded-xl">
-                        <label for="text" class="block text-gray-700 font-semibold mb-3 text-lg">
-                            <i class="fas fa-link mr-2 text-primary"></i>Enter Text or URL
-                        </label>
-                        <input type="text" id="text" class="form-input w-full py-4 px-5 text-lg"
-                               placeholder="https://nextviet.com or your custom text">
+        <main class="panel-grid">
+            <section class="controls card">
+                <div class="field-group">
+                    <div>
+                        <div class="section-title"><i class="fas fa-link"></i>Thông tin nội dung</div>
+                        <label for="text">Text hoặc URL</label>
+                        <input id="text" type="text" class="control" placeholder="https://nextviet.com hoặc thông điệp của bạn">
                     </div>
 
-                    <!-- Logo Upload -->
-                    <div class="glass-effect p-6 rounded-xl">
-                        <label for="logo" class="block text-gray-700 font-semibold mb-3 text-lg">
-                            <i class="fas fa-image mr-2 text-secondary"></i>Upload Logo (Optional)
-                        </label>
-                        <input type="file" id="logo"
-                               class="form-input w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-blue-50 file:to-green-50 file:text-blue-700 hover:file:from-blue-100 hover:file:to-green-100">
+                    <div>
+                        <div class="section-title"><i class="fas fa-image"></i>Logo tuỳ chọn</div>
+                        <label for="logo">Tải logo (PNG, JPG)</label>
+                        <input id="logo" type="file" class="control" accept="image/png,image/jpeg">
                     </div>
 
-                    <!-- Shape Options -->
-                    <div class="glass-effect p-6 rounded-xl">
-                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Customization Options</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="section-title"><i class="fas fa-shapes"></i>Kiểu hiển thị</div>
+                        <div class="field-row">
                             <div>
-                                <label for="dot-shape" class="block text-gray-700 font-medium mb-2">Dot Shape</label>
-                                <select id="dot-shape" class="form-select w-full py-3 px-4 text-lg">
+                                <label for="dot-shape">Dot Shape</label>
+                                <select id="dot-shape" class="control">
                                     <option value="square">Square</option>
                                     <option value="circle">Circle</option>
                                     <option value="diamond">Diamond</option>
                                 </select>
                             </div>
                             <div>
-                                <label for="eye-shape" class="block text-gray-700 font-medium mb-2">Eye Shape</label>
-                                <select id="eye-shape" class="form-select w-full py-3 px-4 text-lg">
+                                <label for="eye-shape">Eye Shape</label>
+                                <select id="eye-shape" class="control">
                                     <option value="square">Square</option>
                                     <option value="circle">Circle</option>
                                     <option value="rounded">Rounded</option>
@@ -204,65 +337,54 @@
                         </div>
                     </div>
 
-                    <!-- Color Options -->
-                    <div class="glass-effect p-6 rounded-xl">
-                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Color Scheme</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <div class="section-title"><i class="fas fa-palette"></i>Bảng màu NextViet</div>
+                        <div class="field-row field-row--triple">
                             <div>
-                                <label for="dot-color" class="block text-gray-700 font-medium mb-2">Dot Color</label>
-                                <input type="color" id="dot-color" value="#2563eb"
-                                       class="form-input w-full h-14 rounded-lg cursor-pointer">
+                                <label for="dot-color">Dot Color</label>
+                                <input id="dot-color" type="color" class="control" value="#2563eb">
                             </div>
                             <div>
-                                <label for="eye-color" class="block text-gray-700 font-medium mb-2">Eye Color</label>
-                                <input type="color" id="eye-color" value="#10b981"
-                                       class="form-input w-full h-14 rounded-lg cursor-pointer">
+                                <label for="eye-color">Eye Color</label>
+                                <input id="eye-color" type="color" class="control" value="#10b981">
                             </div>
                             <div>
-                                <label for="bg-color" class="block text-gray-700 font-medium mb-2">Background</label>
-                                <input type="color" id="bg-color" value="#ffffff"
-                                       class="form-input w-full h-14 rounded-lg cursor-pointer">
+                                <label for="bg-color">Background</label>
+                                <input id="bg-color" type="color" class="control" value="#ffffff">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Padding Control -->
-                    <div class="glass-effect p-6 rounded-xl">
-                        <label for="padding" class="block text-gray-700 font-semibold mb-3 text-lg">
-                            <i class="fas fa-expand-arrows-alt mr-2 text-accent"></i>Padding
-                        </label>
-                        <input type="range" id="padding" min="0" max="10" value="1"
-                               class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                    <div>
+                        <div class="section-title"><i class="fas fa-border-all"></i>Khoảng cách</div>
+                        <label for="padding">Padding (0 - 10)</label>
+                        <input id="padding" type="range" class="control" min="0" max="10" value="1">
                     </div>
 
-                    <!-- Generate Button -->
-                    <div class="text-center">
-                        <button id="generate-btn" class="btn-primary w-full flex items-center justify-center text-xl py-4">
-                            <i class="fas fa-magic mr-3"></i>Generate QR Code
-                        </button>
+                    <button id="generate-btn" class="button-primary">
+                        <i class="fas fa-sparkles"></i>
+                        Tạo mã QR ngay
+                    </button>
+                </div>
+            </section>
+
+            <section class="preview card">
+                <div class="preview-heading">
+                    <h2>Xem trước</h2>
+                    <span>Mã QR NextViet sẽ hiển thị tại đây</span>
+                </div>
+                <div id="qr-code-preview" class="preview-frame">
+                    <div class="preview-placeholder">
+                        <i class="fas fa-qrcode"></i>
+                        <span>Chưa có mã QR</span>
+                        <small class="text-gray-500">Nhập nội dung và nhấn "Tạo mã QR"</small>
                     </div>
                 </div>
-            </div>
-
-            <!-- Preview Panel -->
-            <div class="card p-8 flex flex-col items-center justify-center space-y-8">
-                <div class="text-center mb-4">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">QR Code Preview</h3>
-                    <p class="text-sm text-gray-600">Your QR code will appear here</p>
-                </div>
-
-                <div id="qr-code-preview"
-                     class="w-full h-auto aspect-square border-2 border-dashed rounded-xl flex items-center justify-center bg-gray-50 min-h-[300px]">
-                    <div class="text-center">
-                        <i class="fas fa-qrcode text-6xl text-gray-300 mb-4"></i>
-                        <p class="text-gray-400 text-lg">Preview Area</p>
-                    </div>
-                </div>
-
-                <a id="download-btn" class="hidden btn-secondary w-full text-center text-xl" href="#" download="nextviet-qr-code.png">
-                    <i class="fas fa-download mr-2"></i>Download QR Code
+                <a id="download-btn" class="download" href="#" download="nextviet-qr-code.png">
+                    <i class="fas fa-download"></i>
+                    Tải QR Code
                 </a>
-            </div>
+            </section>
         </main>
     </div>
 
