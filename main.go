@@ -19,8 +19,8 @@ func main() {
 	frontendFs := http.FileServer(http.Dir("./web/templates/"))
 	http.Handle("/", frontendFs)
 
-	log.Println("Server starting on port 8080...")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	log.Println("Server starting on port 8099...")
+	if err := http.ListenAndServe(":8099", nil); err != nil {
 		log.Fatal(err)
 	}
 }
