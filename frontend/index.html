@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-8">QR Code Generator</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-lg">
+                <div class="mb-4">
+                    <label for="text" class="block text-gray-700 font-bold mb-2">Enter Text or URL</label>
+                    <input type="text" id="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter content to encode">
+                </div>
+                <div class="mb-4">
+                    <label for="logo" class="block text-gray-700 font-bold mb-2">Upload Logo (Optional)</label>
+                    <input type="file" id="logo" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="eye-shape" class="block text-gray-700 font-bold mb-2">Eye Shape</label>
+                        <select id="eye-shape" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="square">Square</option>
+                            <option value="circle">Circle</option>
+                            <option value="rounded">Rounded</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="dot-shape" class="block text-gray-700 font-bold mb-2">Dot Shape</label>
+                        <select id="dot-shape" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="square">Square</option>
+                            <option value="circle">Circle</option>
+                            <option value="diamond">Diamond</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label for="bg-color" class="block text-gray-700 font-bold mb-2">Background Color</label>
+                        <input type="color" id="bg-color" value="#ffffff" class="shadow border rounded w-full h-10">
+                    </div>
+                    <div>
+                        <label for="dot-color" class="block text-gray-700 font-bold mb-2">Dot Color</label>
+                        <input type="color" id="dot-color" value="#000000" class="shadow border rounded w-full h-10">
+                    </div>
+                    <div>
+                        <label for="eye-color" class="block text-gray-700 font-bold mb-2">Eye Color</label>
+                        <input type="color" id="eye-color" value="#000000" class="shadow border rounded w-full h-10">
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button id="generate-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Generate QR Code
+                    </button>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-center">
+                <div id="qr-code-preview" class="w-64 h-64 border-2 border-dashed rounded-lg flex items-center justify-center">
+                    <p class="text-gray-400">Preview</p>
+                </div>
+                <a id="download-btn" class="hidden mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" href="#" download="qr-code.png">
+                    Download PNG
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
