@@ -8,7 +8,7 @@ WORKDIR /app
 COPY go.mod go.sum ./
 
 # Download dependencies
-RUN go mod download
+RUN go mod tidy
 
 
 # Make sure GOPATH/bin is in PATH
