@@ -45,6 +45,7 @@
             font-weight: 700;
             letter-spacing: -1px;
             background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -322,16 +323,12 @@
                                 <label for="dot-shape">Dot Shape</label>
                                 <select id="dot-shape" class="control">
                                     <option value="square">Square</option>
-                                    <option value="circle">Circle</option>
-                                    <option value="diamond">Diamond</option>
                                 </select>
                             </div>
                             <div>
                                 <label for="eye-shape">Eye Shape</label>
                                 <select id="eye-shape" class="control">
                                     <option value="square">Square</option>
-                                    <option value="circle">Circle</option>
-                                    <option value="rounded">Rounded</option>
                                 </select>
                             </div>
                         </div>
@@ -342,11 +339,11 @@
                         <div class="field-row field-row--triple">
                             <div>
                                 <label for="dot-color">Dot Color</label>
-                                <input id="dot-color" type="color" class="control" value="#2563eb">
+                                <input id="dot-color" type="color" class="control" value="#000000">
                             </div>
                             <div>
                                 <label for="eye-color">Eye Color</label>
-                                <input id="eye-color" type="color" class="control" value="#10b981">
+                                <input id="eye-color" type="color" class="control" value="#000000">
                             </div>
                             <div>
                                 <label for="bg-color">Background</label>

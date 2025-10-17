@@ -47,14 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(blob => {
             const imageUrl = URL.createObjectURL(blob);
-            qrCodePreview.innerHTML = `<img src="${imageUrl}" alt="Generated QR Code" class="w-full h-full">`;
+            qrCodePreview.innerHTML = `<img src="${imageUrl}" alt="Generated QR Code" class="qr-image">`;
             downloadBtn.href = imageUrl;
-            downloadBtn.classList.remove('hidden');
+            downloadBtn.classList.add('visible');
         })
         .catch(error => {
             console.error('Error generating QR code:', error);
             qrCodePreview.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
-            downloadBtn.classList.add('hidden');
+            downloadBtn.classList.remove('visible');
         });
     });
 });
