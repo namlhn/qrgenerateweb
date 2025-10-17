@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextViet QR - QR Code Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #10b981;
+            --secondary-dark: #059669;
+            --accent-color: #f59e0b;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #e0f2fe 100%);
+            color: var(--text-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .brand-gradient {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease-in-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .form-input, .form-select {
+            border-radius: 0.75rem;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease-in-out;
+            background-color: #fafafa;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            background-color: white;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            border: none;
+            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px 0 rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            border: none;
+            box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px 0 rgba(16, 185, 129, 0.5);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        #qr-code-preview {
+            border: 2px dashed var(--border-color);
+            background: linear-gradient(45deg, #f8fafc 25%, transparent 25%),
+                        linear-gradient(-45deg, #f8fafc 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, #f8fafc 75%),
+                        linear-gradient(-45deg, transparent 75%, #f8fafc 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .logo {
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen">
+    <div class="container mx-auto p-4 md:p-8">
+        <!-- Header with Logo and Brand -->
+        <header class="text-center mb-16 relative">
+            <div class="flex items-center justify-center mb-6 animate-float">
+                <img src="/static/logonv.png" alt="NextViet Logo" class="logo w-16 h-16 mr-4 rounded-full">
+                <div>
+                    <h1 class="text-6xl font-bold brand-gradient">NextViet</h1>
+                    <p class="text-2xl font-light text-gray-600 mt-1">QR Code Generator</p>
+                </div>
+            </div>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Create stunning, professional QR codes with advanced customization options.
+                Perfect for businesses, events, and personal use.
+            </p>
+
+            <!-- Feature highlights -->
+            <div class="flex justify-center mt-8 space-x-8">
+                <div class="feature-card px-4 py-2 rounded-full">
+                    <span class="text-sm font-medium text-gray-700">✨ Custom Shapes</span>
+                </div>
+                <div class="feature-card px-4 py-2 rounded-full">
+                    <span class="text-sm font-medium text-gray-700">🎨 Color Themes</span>
+                </div>
+                <div class="feature-card px-4 py-2 rounded-full">
+                    <span class="text-sm font-medium text-gray-700">🖼️ Logo Support</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Controls Panel -->
+            <div class="lg:col-span-2 card p-8">
+                <div class="space-y-8">
+                    <!-- Text Input -->
+                    <div class="glass-effect p-6 rounded-xl">
+                        <label for="text" class="block text-gray-700 font-semibold mb-3 text-lg">
+                            <i class="fas fa-link mr-2 text-primary"></i>Enter Text or URL
+                        </label>
+                        <input type="text" id="text" class="form-input w-full py-4 px-5 text-lg"
+                               placeholder="https://nextviet.com or your custom text">
+                    </div>
+
+                    <!-- Logo Upload -->
+                    <div class="glass-effect p-6 rounded-xl">
+                        <label for="logo" class="block text-gray-700 font-semibold mb-3 text-lg">
+                            <i class="fas fa-image mr-2 text-secondary"></i>Upload Logo (Optional)
+                        </label>
+                        <input type="file" id="logo"
+                               class="form-input w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-blue-50 file:to-green-50 file:text-blue-700 hover:file:from-blue-100 hover:file:to-green-100">
+                    </div>
+
+                    <!-- Shape Options -->
+                    <div class="glass-effect p-6 rounded-xl">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Customization Options</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="dot-shape" class="block text-gray-700 font-medium mb-2">Dot Shape</label>
+                                <select id="dot-shape" class="form-select w-full py-3 px-4 text-lg">
+                                    <option value="square">Square</option>
+                                    <option value="circle">Circle</option>
+                                    <option value="diamond">Diamond</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="eye-shape" class="block text-gray-700 font-medium mb-2">Eye Shape</label>
+                                <select id="eye-shape" class="form-select w-full py-3 px-4 text-lg">
+                                    <option value="square">Square</option>
+                                    <option value="circle">Circle</option>
+                                    <option value="rounded">Rounded</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Color Options -->
+                    <div class="glass-effect p-6 rounded-xl">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Color Scheme</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="dot-color" class="block text-gray-700 font-medium mb-2">Dot Color</label>
+                                <input type="color" id="dot-color" value="#2563eb"
+                                       class="form-input w-full h-14 rounded-lg cursor-pointer">
+                            </div>
+                            <div>
+                                <label for="eye-color" class="block text-gray-700 font-medium mb-2">Eye Color</label>
+                                <input type="color" id="eye-color" value="#10b981"
+                                       class="form-input w-full h-14 rounded-lg cursor-pointer">
+                            </div>
+                            <div>
+                                <label for="bg-color" class="block text-gray-700 font-medium mb-2">Background</label>
+                                <input type="color" id="bg-color" value="#ffffff"
+                                       class="form-input w-full h-14 rounded-lg cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Padding Control -->
+                    <div class="glass-effect p-6 rounded-xl">
+                        <label for="padding" class="block text-gray-700 font-semibold mb-3 text-lg">
+                            <i class="fas fa-expand-arrows-alt mr-2 text-accent"></i>Padding
+                        </label>
+                        <input type="range" id="padding" min="0" max="10" value="1"
+                               class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+                    </div>
+
+                    <!-- Generate Button -->
+                    <div class="text-center">
+                        <button id="generate-btn" class="btn-primary w-full flex items-center justify-center text-xl py-4">
+                            <i class="fas fa-magic mr-3"></i>Generate QR Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="card p-8 flex flex-col items-center justify-center space-y-8">
+                <div class="text-center mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">QR Code Preview</h3>
+                    <p class="text-sm text-gray-600">Your QR code will appear here</p>
+                </div>
+
+                <div id="qr-code-preview"
+                     class="w-full h-auto aspect-square border-2 border-dashed rounded-xl flex items-center justify-center bg-gray-50 min-h-[300px]">
+                    <div class="text-center">
+                        <i class="fas fa-qrcode text-6xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-400 text-lg">Preview Area</p>
+                    </div>
+                </div>
+
+                <a id="download-btn" class="hidden btn-secondary w-full text-center text-xl" href="#" download="nextviet-qr-code.png">
+                    <i class="fas fa-download mr-2"></i>Download QR Code
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
