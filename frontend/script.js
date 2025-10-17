@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoInput = document.getElementById('logo');
     const bgColorInput = document.getElementById('bg-color');
     const dotColorInput = document.getElementById('dot-color');
+    const eyeColorInput = document.getElementById('eye-color');
+    const eyeShapeInput = document.getElementById('eye-shape');
+    const dotShapeInput = document.getElementById('dot-shape');
+    const paddingInput = document.getElementById('padding');
 
     generateBtn.addEventListener('click', () => {
         const text = textInput.value;
@@ -20,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('text', text);
         formData.append('bgColor', bgColorInput.value);
         formData.append('dotColor', dotColorInput.value);
+        formData.append('eyeColor', eyeColorInput.value);
+        formData.append('eyeShape', eyeShapeInput.value);
+        formData.append('dotShape', dotShapeInput.value);
+        formData.append('padding', paddingInput.value);
 
         if (logoInput.files && logoInput.files[0]) {
             formData.append('logo', logoInput.files[0]);
