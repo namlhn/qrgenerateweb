@@ -10,9 +10,6 @@ COPY go.mod go.sum ./
 # Download dependencies
 RUN go mod tidy
 
-
-# Make sure GOPATH/bin is in PATH
-ENV PATH="$PATH:$(go env GOPATH)/bin"
 # Copy the source code
 COPY . /app
 
