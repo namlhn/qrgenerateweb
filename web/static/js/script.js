@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     generateBtn.addEventListener('click', () => {
         const text = textInput.value;
         if (!text) {
-            alert('Please enter text or a URL.');
+            alert('Vui lòng nhập nội dung hoặc URL.');
             return;
         }
 
-        qrCodePreview.innerHTML = '<p class="text-gray-400">Generating...</p>';
+        qrCodePreview.innerHTML = '<p class="text-gray-400">Đang tạo...</p>';
 
         const formData = new FormData();
         formData.append('text', text);
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error('Error generating QR code:', error);
-            qrCodePreview.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
+            qrCodePreview.innerHTML = `<p class="text-red-500">Lỗi: ${error.message}</p>`;
             downloadBtn.classList.remove('visible');
         });
     });
